@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+/*
+  Tokens de marca Domotika (verde oliva).
+  En Tailwind v4, @theme convierte estas variables en utilidades:
+  bg-ink, text-olive, bg-gold, font-display, etc.
+*/
+@theme {
+  --color-ink: #1c2118;
+  --color-ink-soft: #2a3224;
+  --color-olive: #6b7c3e;
+  --color-olive-light: #a3b18a;
+  --color-surface: #f3f1e8;
+  --color-surface-muted: #e7e4d8;
+  --color-gold: #c4a35a;
+  --color-gold-deep: #a8863f;
+
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-rise: rise 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade-up: fade-up 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Estilos a nivel de documento (fuera del Shadow DOM) */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
