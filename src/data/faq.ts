@@ -27,7 +27,7 @@ export const faqItems: FaqItem[] = [
     id: 'shipping',
     question: '¿Cuándo recibiré mi pedido?',
     answer:
-      'Esta web es una demo educativa. En una tienda real aquí verías plazos de envío, tracking y políticas de devolución. Por ahora el catálogo es estático para aprender LitElement.',
+      'Los pedidos se preparan en 24–48 h laborables. El envío estándar a Península suele tardar 2–4 días; recibirás el tracking por email en cuanto salga el paquete. Cambios y devoluciones en 14 días.',
   },
   {
     id: 'privacy',

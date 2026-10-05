@@ -64,8 +64,7 @@ export class FaqSection extends LitElement {
               Dudas frecuentes
             </h2>
             <p class="mt-4 max-w-md text-base leading-relaxed text-surface/65">
-              Respuestas rápidas sobre Green, Zigbee y Z-Wave. El acordeón es
-              interactivo: prueba a abrir y cerrar preguntas.
+              Respuestas rápidas sobre Green, Zigbee, Z-Wave y envíos de Domotika.
             </p>
           </div>
 

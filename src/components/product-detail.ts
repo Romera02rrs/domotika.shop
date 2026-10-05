@@ -149,7 +149,7 @@ export class ProductDetail extends LitElement {
           </div>
 
           <div class="flex flex-col">
-            <p class="text-xs font-bold uppercase tracking-[0.22em] text-olive">Inspección</p>
+            <p class="text-xs font-bold uppercase tracking-[0.22em] text-olive">Producto</p>
             <h1
               class="mt-3 font-display text-[clamp(2rem,4.5vw,3.1rem)] font-extrabold leading-[1.05] tracking-tight text-ink"
             >
@@ -181,7 +181,7 @@ export class ProductDetail extends LitElement {
 
             ${this.justAdded
               ? html`<p class="mt-4 text-sm font-medium text-olive" role="status">
-                  Producto añadido al carrito (demo, sin checkout).
+                  Producto añadido al carrito.
                 </p>`
               : nothing}
 

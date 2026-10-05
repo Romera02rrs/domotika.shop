@@ -166,7 +166,7 @@ export class CartDrawer extends LitElement {
             class="inline-flex h-12 w-full items-center justify-center rounded-full bg-ink text-sm font-bold text-surface disabled:cursor-not-allowed disabled:opacity-40"
             ?disabled=${this.lines.length === 0}
           >
-            Checkout (próximamente)
+            Finalizar compra
           </button>
           ${this.lines.length > 0
             ? html`<button

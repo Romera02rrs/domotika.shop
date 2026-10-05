@@ -23,7 +23,7 @@ export class SiteFooter extends LitElement {
             Domotika<span class="text-gold">.</span>
           </p>
           <p class="text-sm text-ink/50">
-            Demo educativa con LitElement · Hardware Home Assistant
+            © ${new Date().getFullYear()} Domotika · Hardware oficial Home Assistant
           </p>
         </div>
       </footer>
