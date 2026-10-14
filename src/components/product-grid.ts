@@ -76,6 +76,7 @@ export class ProductGrid extends LitElement {
                     tag=${product.tag}
                     .description=${product.description}
                     .price=${product.price}
+                    ?available=${product.available}
                     accent=${product.accent}
                   ></product-card>
                 </div>
