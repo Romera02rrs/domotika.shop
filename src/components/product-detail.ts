@@ -1,5 +1,5 @@
-import { LitElement, css, html, nothing } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { LitElement, css, html } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
 import { getProductById } from '../data/products';
 import { goHome } from '../utils/routing';
@@ -9,8 +9,6 @@ import { tw } from '../styles/tailwind';
  * Vista de inspección de un producto.
  *
  * Recibe `productId` como `@property` desde `app-root`.
- * El botón "Añadir al carrito" emite un CustomEvent `add-to-cart`
- * (hijo → padre) para que el carrito viva en el shell de la app.
  */
 @customElement('product-detail')
 export class ProductDetail extends LitElement {
@@ -54,12 +52,6 @@ export class ProductDetail extends LitElement {
   @property({ attribute: 'product-id' })
   productId = '';
 
-  /** Feedback breve tras añadir al carrito. */
-  @state()
-  private justAdded = false;
-
-  private addTimer?: number;
-
   private get product() {
     return getProductById(this.productId);
   }
@@ -67,25 +59,6 @@ export class ProductDetail extends LitElement {
   private backToCatalog(event: Event) {
     event.preventDefault();
     goHome('productos');
-  }
-
-  private addToCart() {
-    const product = this.product;
-    if (!product) return;
-
-    this.dispatchEvent(
-      new CustomEvent('add-to-cart', {
-        detail: { productId: product.id, name: product.name, price: product.price },
-        bubbles: true,
-        composed: true,
-      }),
-    );
-
-    this.justAdded = true;
-    window.clearTimeout(this.addTimer);
-    this.addTimer = window.setTimeout(() => {
-      this.justAdded = false;
-    }, 2200);
   }
 
   render() {
@@ -162,15 +135,30 @@ export class ProductDetail extends LitElement {
             <p class="mt-8 font-display text-4xl font-extrabold text-olive">
               ${product.price}<span class="text-xl font-semibold text-ink/40"> €</span>
             </p>
+            <p
+              class="mt-3 text-sm font-semibold uppercase tracking-[0.12em] ${product.available
+                ? 'text-olive'
+                : 'text-ink/55'}"
+            >
+              ${product.available ? 'Disponible para compra' : 'No disponible'}
+            </p>
 
             <div class="mt-6 flex flex-wrap gap-3">
-              <button
-                type="button"
-                class="inline-flex h-12 min-w-[10rem] items-center justify-center rounded-full bg-gold px-6 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-gold-deep hover:text-surface"
-                @click=${this.addToCart}
-              >
-                ${this.justAdded ? 'Añadido ✓' : 'Añadir al carrito'}
-              </button>
+              ${product.available && product.purchaseUrl
+                ? html`<a
+                    href=${product.purchaseUrl}
+                    class="inline-flex h-12 min-w-[10rem] items-center justify-center rounded-full bg-gold px-6 text-sm font-bold text-ink transition hover:-translate-y-0.5 hover:bg-gold-deep hover:text-surface"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Comprar en Amazon
+                  </a>`
+                : html`<span
+                    class="inline-flex h-12 min-w-[10rem] items-center justify-center rounded-full bg-ink/8 px-6 text-sm font-bold text-ink/50"
+                    aria-disabled="true"
+                  >
+                    No disponible
+                  </span>`}
               <a
                 href="#faq"
                 class="inline-flex h-12 items-center justify-center rounded-full border border-ink/15 px-6 text-sm font-semibold text-ink transition hover:border-olive hover:bg-olive-light/20"
@@ -178,12 +166,6 @@ export class ProductDetail extends LitElement {
                 Ver FAQ
               </a>
             </div>
-
-            ${this.justAdded
-              ? html`<p class="mt-4 text-sm font-medium text-olive" role="status">
-                  Producto añadido al carrito.
-                </p>`
-              : nothing}
 
             <div class="mt-10">
               <h2 class="font-display text-lg font-bold text-ink">Qué incluye</h2>

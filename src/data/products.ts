@@ -16,6 +16,8 @@ export type Product = {
   /** Specs rápidas (etiqueta → valor) */
   specs: { label: string; value: string }[];
   price: number;
+  available: boolean;
+  purchaseUrl?: string;
   /** Color de acento para el bloque visual del producto */
   accent: string;
 };
@@ -41,7 +43,9 @@ export const products: Product[] = [
       { label: 'Red', value: 'Ethernet' },
       { label: 'Ideal para', value: 'Empezar desde cero' },
     ],
-    price: 99,
+    price: 179,
+    available: true,
+    purchaseUrl: 'https://www.amazon.es/Nabu-Casa-Home-Assistant-Verde/dp/B0CXVKSG19',
     accent: '#6B7C3E',
   },
   {
@@ -65,6 +69,7 @@ export const products: Product[] = [
       { label: 'Ideal para', value: 'Sensores y luces' },
     ],
     price: 39,
+    available: false,
     accent: '#A3B18A',
   },
   {
@@ -88,6 +93,7 @@ export const products: Product[] = [
       { label: 'Ideal para', value: 'Cerraduras y enchufes' },
     ],
     price: 49,
+    available: false,
     accent: '#C4A35A',
   },
 ];

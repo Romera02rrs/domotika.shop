@@ -64,6 +64,9 @@ export class ProductCard extends LitElement {
   @property({ type: Number })
   price = 0;
 
+  @property({ type: Boolean })
+  available = true;
+
   @property()
   accent = '#6B7C3E';
 
@@ -100,6 +103,14 @@ export class ProductCard extends LitElement {
             <p class="font-display text-2xl font-bold text-olive">
               ${this.price}<span class="text-base font-semibold text-ink/45"> €</span>
             </p>
+            <span
+              class="inline-flex items-center rounded-full px-3 py-1 text-[0.68rem] font-bold uppercase tracking-[0.12em] ${this
+                .available
+                ? 'bg-olive-light/35 text-olive'
+                : 'bg-ink/10 text-ink/55'}"
+            >
+              ${this.available ? 'Disponible' : 'No disponible'}
+            </span>
             <a
               href=${this.detailHref}
               class="inline-flex h-11 items-center rounded-full bg-ink px-4 text-xs font-bold uppercase tracking-[0.12em] text-surface transition hover:bg-olive"
